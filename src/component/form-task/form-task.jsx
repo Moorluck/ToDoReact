@@ -33,6 +33,10 @@ const FormTask = (props) => {
         else {
             alert("Remplir tous les champs !")
         }
+
+        setName("")
+        setDescription("")
+        setPriority("moy")
         
     }
 
