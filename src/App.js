@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import FormTask from './component/form-task/form-task';
+import TaskList from './component/task-list/task-list';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [data, setData] = useState([])
+
+    const onSubmitTask = (task) => {
+        setData([...data, task])
+    }
+
+    const onFinish = (id) => {
+        const task = data[data.findIndex(task => task.id === id)]
+        const newData = data
+        newData.splice(newData.findIndex(task => task.id === id), 1)
+        task.isFinish = true
+        setData([...newData, task])
+    }
+
+    const onDelete = (id) => {
+        setData(data.filter(task => task.id !== id))
+    }
+
+    return (
+        <div className="App">
+            <h1>ToDo App</h1>
+
+            <h2>Ajouter une tâche</h2>
+            <FormTask onSubmitTask={onSubmitTask}/>
+            <h2>Liste des tâches</h2>
+            <TaskList data={data} onFinish={onFinish} onDelete={onDelete}/>
+        </div>
+    );
 }
 
 export default App;
