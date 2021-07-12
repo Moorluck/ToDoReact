@@ -9,15 +9,15 @@ function App() {
     const [data, setData] = useState([])
 
     const onSubmitTask = (task) => {
-        setData([...data, task])
+        setData([task, ...data])
     }
 
     const onFinish = (id) => {
         const task = data[data.findIndex(task => task.id === id)]
-        const newData = data
-        newData.splice(newData.findIndex(task => task.id === id), 1)
         task.isFinish = true
-        setData([...newData, task])
+        const newData = data
+        newData[data.findIndex(task => task.id === id)] = task
+        setData([...newData])
     }
 
     const onDelete = (id) => {

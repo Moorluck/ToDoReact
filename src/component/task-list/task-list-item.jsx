@@ -16,7 +16,7 @@ const TaskListItem = (props) => {
         <ul>
             <div>
                 <div> 
-                    <label style={{marginRight: '100px'}}>{name} </label>
+                    <label className={style.margin}>{name} </label>
 
                     <button onClick={handleFinish} disabled={isFinish}>Terminer</button>
                     <button onClick={handleDelete}>Supprimer</button>
